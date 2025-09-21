@@ -8,6 +8,8 @@ public class PlayerHealth : MonoBehaviour
 
     private bool isSafe = false;
 
+    public int CollectedLightbulbsNumber = 0;
+
     void Start()
     {
 
