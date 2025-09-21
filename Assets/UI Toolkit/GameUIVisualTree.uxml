@@ -1,0 +1,7 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="Container" style="flex-grow: 1;">
+        <ui:VisualElement name="HealthBarBackground" style="flex-grow: 1; background-image: url(&quot;project://database/Packages/com.unity.2d.sprite/Editor/ObjectMenuCreation/DefaultAssets/Textures/Square.png?fileID=7482667652216324306&amp;guid=48e93eef0688c4a259cb0eddcd8661f7&amp;type=3#Square&quot;); width: 513px; height: 56px; position: absolute; margin-left: 80px; margin-top: 23px; background-color: rgb(111, 111, 111); -unity-background-image-tint-color: rgba(255, 255, 255, 0); top: -2px; left: -7px;" />
+        <ui:VisualElement name="HealthBarFill" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/br_mainsheet.png?fileID=-7627772524362612523&amp;guid=a130ff8a0f77ddd4da251ad0899f1b77&amp;type=3#br_mainsheet_4&quot;); position: absolute; height: 80px; width: 508px; overflow: visible; margin-top: 9px; margin-left: 0; left: 76px;" />
+        <ui:VisualElement name="HealthBarOutline" style="flex-grow: 1; position: absolute; width: 600px; height: 100px; background-image: url(&quot;project://database/Assets/Sprites/br_mainsheet.png?fileID=9137934714200860982&amp;guid=a130ff8a0f77ddd4da251ad0899f1b77&amp;type=3#br_mainsheet_0&quot;);" />
+    </ui:VisualElement>
+</ui:UXML>
