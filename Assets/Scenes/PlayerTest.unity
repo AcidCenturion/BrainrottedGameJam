@@ -153,6 +153,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 5
+  dashSpeed: 12
+  dashDuration: 0.2
+  dashMaxCooldown: 3
   jumpPower: 5
   groundLayer:
     serializedVersion: 2
@@ -423,7 +426,7 @@ GameObject:
   - component: {fileID: 2049323047}
   - component: {fileID: 2049323046}
   - component: {fileID: 2049323045}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
