@@ -1,0 +1,20 @@
+.header {
+}
+
+.button {
+    width: 500px;
+    height: 100px;
+    font-size: 67px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    align-self: center;
+    transition-duration: 0.35s;
+    -unity-background-image-tint-color: rgb(240, 7, 7);
+}
+
+.button:hover {
+    scale: 1.1 1.1;
+    -unity-background-image-tint-color: rgb(251, 15, 15);
+}
