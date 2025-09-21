@@ -332,14 +332,13 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
---- !u!4 &948859699
-Transform:
+--- !u!224 &948859699
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 948859697}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -347,6 +346,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 960, y: 540}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &948859700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,7 +403,6 @@ MonoBehaviour:
   dashSpeed: 12
   dashDuration: 0.2
   dashMaxCooldown: 3
-  jumpPower: 5
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -938,5 +941,5 @@ SceneRoots:
   - {fileID: 1867974967}
   - {fileID: 2049323047}
   - {fileID: 1896780966}
-  - {fileID: 948859699}
   - {fileID: 473409867}
+  - {fileID: 948859699}

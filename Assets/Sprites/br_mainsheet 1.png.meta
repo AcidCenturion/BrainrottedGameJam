@@ -163,7 +163,7 @@ TextureImporter:
         serializedVersion: 2
         x: 101
         y: 241
-        width: 11
+        width: 2
         height: 13
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -205,9 +205,9 @@ TextureImporter:
       name: br_mainsheet 1_3
       rect:
         serializedVersion: 2
-        x: 126
+        x: 135
         y: 241
-        width: 11
+        width: 2
         height: 13
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
