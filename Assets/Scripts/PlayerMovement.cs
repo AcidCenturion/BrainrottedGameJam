@@ -9,8 +9,10 @@ public class PlatformerPlayerMove : MonoBehaviour
     public float dashSpeed;
     public float dashDuration;
     public float dashMaxCooldown;
+    public float jumpPower;
     public LayerMask groundLayer;
 
+    private Rigidbody2D rb;
     private float movementInput;
     private bool dashInput;
     private float dashTimer;
@@ -19,17 +21,8 @@ public class PlatformerPlayerMove : MonoBehaviour
     private float originalGravity;
     private bool jumpInput;
     private RaycastHit2D groundCheck;
+    private Animator animator;
 
-
-    //new by charlie
-    float horizontalInput;
-    float moveSpeed = 5f;
-    bool isFacingRight = false;
-    float jumpPower = 5f;
-    bool isGrounded = false;
-
-    Rigidbody2D rb;
-    Animator animator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -42,52 +35,16 @@ public class PlatformerPlayerMove : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         movement();
 
-        if(dashInput && dashCooldown <= 0)
-        {
-            dashTimer = dashDuration;
-            dashCooldown = dashMaxCooldown;
-        }
-        dashCooldown -= Time.deltaTime;
+        dash();
 
-        //new by charlie
-        horizontalInput = Input.GetAxis("Horizontal");
+        jump();
 
-        FlipSprite();
-
-        if(Input.GetButtonDown("Jump") && isGrounded)
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
-            isGrounded = false;
-            animator.SetBool("isJumping", !isGrounded);
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
-        animator.SetFloat("xVelocity", Math.Abs(rb.linearVelocity.x));
-        animator.SetFloat("yVelocity", (rb.linearVelocity.y));
-    }
-
-    void FlipSprite() //new by charlie
-    {
-        if(isFacingRight && horizontalInput < 0f || !isFacingRight && horizontalInput > 0f)
-        {
-            isFacingRight = !isFacingRight;
-            Vector3 ls = transform.localScale;
-            ls.x *= -1f;
-            transform.localScale = ls;
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        isGrounded = true;
-        animator.SetBool("isJumping", !isGrounded);
+        animator.SetFloat("xVelocity", Math.Abs(rb.linearVelocityX));
+        animator.SetFloat("yVelocity", rb.linearVelocityY);
     }
 
 
@@ -97,9 +54,17 @@ public class PlatformerPlayerMove : MonoBehaviour
         //save the direction the player is facing
         if(movementInput != 0)
         {
+            if(faceDirection != movementInput)
+            {
+Debug.Log("flip");
+                Vector3 ls = transform.localScale;
+                ls.x *= -1f;
+                transform.localScale = ls;
+            }
             faceDirection = movementInput;
         }
 
+        //if dash is inputted the timer is started
         if(dashTimer > 0)
         {
             rb.linearVelocityY = 0;
@@ -107,6 +72,7 @@ public class PlatformerPlayerMove : MonoBehaviour
             rb.linearVelocityX = faceDirection * dashSpeed;
             dashTimer -= Time.deltaTime;
         }
+        //otherwise move as normal
         else
         {
             rb.gravityScale = originalGravity;
@@ -114,9 +80,47 @@ public class PlatformerPlayerMove : MonoBehaviour
         }
     }
 
+    private void dash()
+    {
+        if(dashInput && dashCooldown <= 0)
+        {
+            dashTimer = dashDuration;
+            dashCooldown = dashMaxCooldown;
+        }
+        dashCooldown -= Time.deltaTime;
+    }
+
+    private void jump()
+    {
+Debug.DrawRay(transform.position, Vector2.down * 1f, Color.red);
+        if(jumpInput && isGrounded())
+        {
+            rb.linearVelocityY = jumpPower;
+            animator.SetBool("isJumping", true);
+        }
+        else if(isGrounded())
+        {
+            animator.SetBool("isJumping", false);
+        }
+    }
+
+
+    // HELPER FUNCTIONS
+    /*
+    true when raycast detects the groundLayer
+    set animator to not jumping when on ground
+    */
+    private bool isGrounded()
+    {
+        groundCheck = Physics2D.Raycast(transform.position, Vector2.down, 1f, groundLayer);
+        return groundCheck;
+    }
+
+
     // ACTION INPUT SYSTEM FUNCTIONS
     /*
     Gets the direction of the input 
+    as a positive or negative value (-1, 1)
     based on bindings connected to the Move action in the Input System asset
     */
     private void OnMove(InputValue input)
@@ -124,10 +128,15 @@ public class PlatformerPlayerMove : MonoBehaviour
         movementInput = input.Get<float>();
     }
 
+    /*
+    dashInput turned true when button is pressed
+    stays true until button is released
+    turns false upon release
+    */
     private void OnDash(InputValue input)
     {
         dashInput = input.isPressed;
-Debug.Log("dash input");
+Debug.Log("checked dash" + dashInput);
     }
 
     /*
