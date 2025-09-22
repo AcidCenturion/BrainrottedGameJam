@@ -20,6 +20,7 @@ public class PlatformerPlayerMove : MonoBehaviour
     private float faceDirection;
     private float originalGravity;
     private bool jumpInput;
+    private bool jumpRelease;
     private RaycastHit2D groundCheck;
     private Animator animator;
 
@@ -42,9 +43,6 @@ public class PlatformerPlayerMove : MonoBehaviour
         dash();
 
         jump();
-
-        animator.SetFloat("xVelocity", Math.Abs(rb.linearVelocityX));
-        animator.SetFloat("yVelocity", rb.linearVelocityY);
     }
 
 
@@ -77,6 +75,7 @@ Debug.Log("flip");
         {
             rb.gravityScale = originalGravity;
             rb.linearVelocityX = movementInput * playerSpeed;
+            animator.SetFloat("xVelocity", Math.Abs(rb.linearVelocityX));
         }
     }
 
@@ -101,6 +100,10 @@ Debug.DrawRay(transform.position, Vector2.down * 1f, Color.red);
         else if(isGrounded())
         {
             animator.SetBool("isJumping", false);
+        }
+        if(!jumpInput && rb.linearVelocityY > 0)
+        {
+            rb.linearVelocityY = 0;
         }
     }
 
