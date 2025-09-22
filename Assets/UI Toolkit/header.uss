@@ -2,20 +2,35 @@
 }
 
 .button {
-    width: 500px;
-    height: 100px;
-    font-size: 105px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
+    width: 640px;
+    height: 160px;
+    font-size: 90px;
+    border-top-left-radius: 49px;
+    border-top-right-radius: 49px;
+    border-bottom-right-radius: 49px;
+    border-bottom-left-radius: 49px;
     align-self: center;
     transition-duration: 0.35s;
-    -unity-background-image-tint-color: rgb(240, 7, 7);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
     -unity-font-definition: url("project://database/Assets/Sprites/BNCOBOY.ttf?fileID=12800000&guid=404dbe8fdb702314eb1420ee806b22ff&type=3#BNCOBOY");
+    background-image: url("project://database/Assets/Sprites/UI/br_button.png?fileID=21300000&guid=0534678fe2123b147918c74fa2d46710&type=3#br_button");
+    background-color: rgba(0, 0, 0, 0);
+    background-size: 100% 100%;
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-type: sliced;
+    -unity-slice-scale: 1px;
+    background-position-x: center 0;
+    background-position-y: center 0;
+    position: relative;
+    top: 0;
+    -unity-text-align: middle-center;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
 }
 
 .button:hover {
     scale: 1.1 1.1;
-    -unity-background-image-tint-color: rgb(251, 15, 15);
+    -unity-background-image-tint-color: rgb(176, 176, 176);
 }

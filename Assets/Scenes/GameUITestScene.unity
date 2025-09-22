@@ -585,6 +585,7 @@ MonoBehaviour:
   dashSpeed: 12
   dashDuration: 0.2
   dashMaxCooldown: 3
+  jumpPower: 5
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
