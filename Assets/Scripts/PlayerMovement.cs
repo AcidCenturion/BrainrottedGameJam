@@ -23,6 +23,7 @@ public class PlatformerPlayerMove : MonoBehaviour
     private bool jumpRelease;
     private RaycastHit2D groundCheck;
     private Animator animator;
+    public PlayerHealth PlayerHealth;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -38,11 +39,14 @@ public class PlatformerPlayerMove : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        movement();
+        if (PlayerHealth.hasDied == false)
+        {
+            movement();
 
-        dash();
+            dash();
 
-        jump();
+            jump();
+        }
     }
 
 

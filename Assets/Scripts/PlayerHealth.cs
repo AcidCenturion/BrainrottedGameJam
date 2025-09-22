@@ -16,9 +16,9 @@ public class PlayerHealth : MonoBehaviour
 
     public int CollectedLightbulbsNumber = 0;
 
-    private bool hasDied = false;
+    public bool hasDied = false;
     private float targetOpacity = 0f; 
-    private float lerpSpeed = 2f;
+    public float lerpSpeed = 2f;
 
 
     void Start()
@@ -30,9 +30,6 @@ public class PlayerHealth : MonoBehaviour
 
     void FixedUpdate()
     {
-
-        //Debug.Log("health: " + currentHealth);
-        //Debug.Log(i);
         if (currentHealth >= 0)
         {
             if (isSafe == false)
@@ -45,8 +42,7 @@ public class PlayerHealth : MonoBehaviour
         {
             hasDied = true;
             targetOpacity = targetOpacity == 1f ? 0f : 1f;
-            Debug.Log("DeathStarted");
-            Die();
+            //Debug.Log("DeathStarted");
         }
 
         if (hasDied)
@@ -58,7 +54,6 @@ public class PlayerHealth : MonoBehaviour
     }
  
     
-
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("SafeZone"))
@@ -76,17 +71,4 @@ public class PlayerHealth : MonoBehaviour
             isSafe = false;
         }
     }
-
-    private void Die()
-    {
-        Debug.Log("player dead bro");
-        // rb.linearVelocityX = 0;
-        // rb.linearVelocityY = 0;
-
-
-    }
-
-
-
-    
 }
