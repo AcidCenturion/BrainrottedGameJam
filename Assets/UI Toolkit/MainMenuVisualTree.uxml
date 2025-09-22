@@ -1,9 +1,8 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/header.uss?fileID=7433441132597879392&amp;guid=b497a3c9fece51a42ad64a6817a72f6a&amp;type=3#header" />
     <ui:VisualElement name="Container" style="flex-grow: 1;">
-        <ui:Label text="Rain Rot" class="header" style="font-size: 150px; align-self: center; margin-top: 105px;" />
-        <ui:Button text="Start" name="StartGameButton" class="button" style="margin-top: 100px; background-image: url(&quot;project://database/Assets/Sprites/br_mainsheet.png?fileID=68820648&amp;guid=a130ff8a0f77ddd4da251ad0899f1b77&amp;type=3#br_mainsheet_11&quot;); -unity-background-image-tint-color: rgb(240, 7, 7); background-color: rgb(56, 56, 56);" />
-        <ui:Button text="Credits" name="CreditsButton" class="button" style="margin-top: 40px;" />
-        <ui:Button text="Quit" name="QuitGameButton" class="button" style="margin-top: 40px;" />
+        <ui:Button text="Start" name="StartGameButton" class="button" style="margin-top: 592px; background-image: url(&quot;project://database/Packages/com.unity.2d.sprite/Editor/ObjectMenuCreation/DefaultAssets/Textures/9-Sliced.png?fileID=-5177388603050735206&amp;guid=71ebafeef3c03457483266a33ab2b270&amp;type=3#9-Sliced&quot;); -unity-background-image-tint-color: rgba(47, 47, 47, 0); background-color: rgb(56, 56, 56); -unity-font-definition: url(&quot;project://database/Assets/Sprites/BNCOBOY.ttf?fileID=12800000&amp;guid=404dbe8fdb702314eb1420ee806b22ff&amp;type=3#BNCOBOY&quot;); font-size: 105px; padding-top: 15px;" />
+        <ui:Button text="Credits" name="CreditsButton" class="button" style="margin-top: 40px; -unity-font-definition: url(&quot;project://database/Assets/Sprites/BNCOBOY.ttf?fileID=12800000&amp;guid=404dbe8fdb702314eb1420ee806b22ff&amp;type=3#BNCOBOY&quot;); padding-top: 16px;" />
+        <ui:Button text="Quit" name="QuitGameButton" class="button" style="margin-top: 40px; padding-top: 15px;" />
     </ui:VisualElement>
 </ui:UXML>
