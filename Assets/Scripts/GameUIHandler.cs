@@ -14,6 +14,9 @@ public class GameUIHandler : MonoBehaviour
     public VisualElement LitLightbulb3;
     public VisualElement LitLightbulb4;
     public VisualElement LitLightbulb5;
+    private Label Timer;
+
+    public float StartTime = 500f;
 
     private void Start()
     {
@@ -24,12 +27,15 @@ public class GameUIHandler : MonoBehaviour
         LitLightbulb3 = UIDoc.rootVisualElement.Q<VisualElement>("LitLightbulb3");
         LitLightbulb4 = UIDoc.rootVisualElement.Q<VisualElement>("LitLightbulb4");
         LitLightbulb5 = UIDoc.rootVisualElement.Q<VisualElement>("LitLightbulb5");
+
+        Timer = UIDoc.rootVisualElement.Q<Label>("Timer");
     }
 
     void FixedUpdate()
     {
         HealthChanged();
         LightbulbCollects();
+        TimerCountdown();
     }
 
     void HealthChanged()
@@ -61,5 +67,11 @@ public class GameUIHandler : MonoBehaviour
         {
             LitLightbulb5.style.opacity = 1.0f;
         }
+    }
+
+    void TimerCountdown()
+    {
+        float temp = StartTime -= Time.deltaTime;
+        Timer.text = ((int)temp).ToString();
     }
 }
