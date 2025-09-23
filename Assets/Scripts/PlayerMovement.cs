@@ -11,6 +11,7 @@ public class PlatformerPlayerMove : MonoBehaviour
     public float dashMaxCooldown;
     public float jumpPower;
     public LayerMask groundLayer;
+    public float coyoteLeniency;
 
     private Rigidbody2D rb;
     private float movementInput;
@@ -22,6 +23,7 @@ public class PlatformerPlayerMove : MonoBehaviour
     private bool jumpInput;
     private bool jumpRelease;
     private RaycastHit2D groundCheck;
+    private float coyoteTime;
     private Animator animator;
     public PlayerHealth PlayerHealth;
 
@@ -96,7 +98,28 @@ Debug.Log("flip");
     private void jump()
     {
 Debug.DrawRay(transform.position, Vector2.down * 1f, Color.red);
-        if(jumpInput && isGrounded())
+
+        // coyote time
+        //timer reset
+        if(isGrounded())
+        {
+            coyoteTime = coyoteLeniency;
+        }
+        //falling after ledge
+        else if (!isGrounded() && rb.linearVelocityY <= 0)
+        {
+            coyoteTime -= Time.deltaTime;
+        }
+        //no coyote time to a regular jump
+        else
+        {
+            coyoteTime = -1;
+        }
+
+        // main jump functionality
+        //any input during coyote time
+        //no jumping during a dash
+        if(jumpInput && coyoteTime >= 0 && !(dashTimer > 0))
         {
             rb.linearVelocityY = jumpPower;
             animator.SetBool("isJumping", true);
@@ -105,6 +128,8 @@ Debug.DrawRay(transform.position, Vector2.down * 1f, Color.red);
         {
             animator.SetBool("isJumping", false);
         }
+
+        // short hop
         if(!jumpInput && rb.linearVelocityY > 0)
         {
             rb.linearVelocityY = 0;
