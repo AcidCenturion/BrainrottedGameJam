@@ -6,7 +6,7 @@ public class PlayerHealth : MonoBehaviour
     public Rigidbody2D rb;
     public UIDocument DeathUIDoc;
     public VisualElement Container;
-    public Button Respawn;
+    // public Button Respawn;
 
     public float maxHealth = 10f;
     public float currentHealth = 10f;
@@ -25,7 +25,7 @@ public class PlayerHealth : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         Container = DeathUIDoc.rootVisualElement.Q<VisualElement>("Container");
-        Respawn = DeathUIDoc.rootVisualElement.Q<Button>("Respawn");
+        // Respawn = DeathUIDoc.rootVisualElement.Q<Button>("Respawn");
     }
 
     void FixedUpdate()
