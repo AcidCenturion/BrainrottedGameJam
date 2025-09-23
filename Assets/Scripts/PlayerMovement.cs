@@ -27,6 +27,7 @@ public class PlatformerPlayerMove : MonoBehaviour
     private Animator animator;
     public PlayerHealth PlayerHealth;
 
+    private bool isFalling = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -44,23 +45,19 @@ public class PlatformerPlayerMove : MonoBehaviour
         if (PlayerHealth.hasDied == false)
         {
             movement();
-
             dash();
-
             jump();
         }
     }
-
 
     // FUNCTIONS
     private void movement()
     {
         //save the direction the player is facing
-        if(movementInput != 0)
+        if (movementInput != 0)
         {
-            if(faceDirection != movementInput)
+            if (faceDirection != movementInput)
             {
-Debug.Log("flip");
                 Vector3 ls = transform.localScale;
                 ls.x *= -1f;
                 transform.localScale = ls;
@@ -69,46 +66,45 @@ Debug.Log("flip");
         }
 
         //if dash is inputted the timer is started
-        if(dashTimer > 0)
+        if (dashTimer > 0)
         {
-            rb.linearVelocityY = 0;
+            rb.linearVelocity = new Vector2(faceDirection * dashSpeed, 0);
             rb.gravityScale = 0;
-            rb.linearVelocityX = faceDirection * dashSpeed;
-            dashTimer -= Time.deltaTime;
+            dashTimer -= Time.fixedDeltaTime;
         }
         //otherwise move as normal
         else
         {
             rb.gravityScale = originalGravity;
-            rb.linearVelocityX = movementInput * playerSpeed;
-            animator.SetFloat("xVelocity", Math.Abs(rb.linearVelocityX));
+            rb.linearVelocity = new Vector2(movementInput * playerSpeed, rb.linearVelocity.y);
+            animator.SetFloat("xVelocity", Math.Abs(rb.linearVelocity.x));
         }
     }
 
     private void dash()
     {
-        if(dashInput && dashCooldown <= 0)
+        if (dashInput && dashCooldown <= 0)
         {
             dashTimer = dashDuration;
             dashCooldown = dashMaxCooldown;
         }
-        dashCooldown -= Time.deltaTime;
+        dashCooldown -= Time.fixedDeltaTime;
     }
 
     private void jump()
     {
-Debug.DrawRay(transform.position, Vector2.down * 1f, Color.red);
+        Debug.DrawRay(transform.position, Vector2.down * 1f, Color.red);
 
         // coyote time
         //timer reset
-        if(isGrounded())
+        if (isGrounded())
         {
             coyoteTime = coyoteLeniency;
         }
         //falling after ledge
-        else if (!isGrounded() && rb.linearVelocityY <= 0)
+        else if (!isGrounded() && rb.linearVelocity.y <= 0)
         {
-            coyoteTime -= Time.deltaTime;
+            coyoteTime -= Time.fixedDeltaTime;
         }
         //no coyote time to a regular jump
         else
@@ -119,23 +115,31 @@ Debug.DrawRay(transform.position, Vector2.down * 1f, Color.red);
         // main jump functionality
         //any input during coyote time
         //no jumping during a dash
-        if(jumpInput && coyoteTime >= 0 && !(dashTimer > 0))
+        if (jumpInput && coyoteTime >= 0 && !(dashTimer > 0))
         {
-            rb.linearVelocityY = jumpPower;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
             animator.SetBool("isJumping", true);
+            animator.SetBool("isFalling", false); // Stop falling animation when jumping
         }
-        else if(isGrounded())
+        else if (isGrounded())
         {
+            // Reset jump/fall state when grounded
             animator.SetBool("isJumping", false);
+            animator.SetBool("isFalling", false);
+        }
+        else if (rb.linearVelocity.y < 0)
+        {
+            // NEW: Check for falling
+            animator.SetBool("isJumping", false); // No longer jumping
+            animator.SetBool("isFalling", true);
         }
 
         // short hop
-        if(!jumpInput && rb.linearVelocityY > 0)
+        if (!jumpInput && rb.linearVelocity.y > 0)
         {
-            rb.linearVelocityY = 0;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
         }
     }
-
 
     // HELPER FUNCTIONS
     /*
@@ -151,7 +155,7 @@ Debug.DrawRay(transform.position, Vector2.down * 1f, Color.red);
 
     // ACTION INPUT SYSTEM FUNCTIONS
     /*
-    Gets the direction of the input 
+    Gets the direction of the input
     as a positive or negative value (-1, 1)
     based on bindings connected to the Move action in the Input System asset
     */
@@ -168,7 +172,6 @@ Debug.DrawRay(transform.position, Vector2.down * 1f, Color.red);
     private void OnDash(InputValue input)
     {
         dashInput = input.isPressed;
-Debug.Log("checked dash" + dashInput);
     }
 
     /*
@@ -179,6 +182,5 @@ Debug.Log("checked dash" + dashInput);
     private void OnJump(InputValue input)
     {
         jumpInput = input.isPressed;
-Debug.Log("checked jump: " + jumpInput);
     }
 }
