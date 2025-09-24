@@ -1,15 +1,7 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class DeathUIEvents : MonoBehaviour
+public class buttonTestScript : MonoBehaviour
 {
-    public GameObject gameOverUI;
-
-    public void GameOver()
-    {
-        gameOverUI.SetActive(true);
-    }
-
     public void Restart()
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

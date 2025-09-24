@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour
     public Rigidbody2D rb;
     public UIDocument DeathUIDoc;
     public VisualElement Container;
+    public DeathUIEvents gameManager;
     // public Button Respawn;
 
     public float maxHealth = 10f;
@@ -43,6 +44,7 @@ public class PlayerHealth : MonoBehaviour
             hasDied = true;
             targetOpacity = targetOpacity == 1f ? 0f : 1f;
             //Debug.Log("DeathStarted");
+            gameManager.GameOver();
         }
 
         if (hasDied)
