@@ -5,9 +5,8 @@ public class PlayerHealth : MonoBehaviour
 {
     public Rigidbody2D rb;
     public UIDocument DeathUIDoc;
-    public VisualElement Container;
-    public DeathUIEvents gameManager;
-    // public Button Respawn;
+    public GameObject DeathUIManager;
+    public GameOverEvents GameOverEvents;
 
     public float maxHealth = 10f;
     public float currentHealth = 10f;
@@ -18,15 +17,11 @@ public class PlayerHealth : MonoBehaviour
     public int CollectedLightbulbsNumber = 0;
 
     public bool hasDied = false;
-    private float targetOpacity = 0f; 
-    public float lerpSpeed = 2f;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Container = DeathUIDoc.rootVisualElement.Q<VisualElement>("Container");
-        // Respawn = DeathUIDoc.rootVisualElement.Q<Button>("Respawn");
     }
 
     void FixedUpdate()
@@ -42,16 +37,13 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0 && !hasDied)
         {
             hasDied = true;
-            targetOpacity = targetOpacity == 1f ? 0f : 1f;
             //Debug.Log("DeathStarted");
-            gameManager.GameOver();
+            DeathUIManager.SetActive(true);
         }
 
         if (hasDied)
         {
-            float currentOpacity = Container.resolvedStyle.opacity;
-            float newOpacity = Mathf.Lerp(currentOpacity, targetOpacity, lerpSpeed * Time.deltaTime);
-            Container.style.opacity = newOpacity;
+            GameOverEvents.FadeInFunction();
         }   
     }
  
