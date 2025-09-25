@@ -10,7 +10,7 @@ public class MainMenuEvents : MonoBehaviour
     private Button _CreditsButton;
     private Button QuitButton;
     private VisualElement Container;
-    private Label CreditsLabel;
+    //private Label CreditsLabel;
 
     public float fadeDuration = 2f;
 
@@ -27,11 +27,11 @@ public class MainMenuEvents : MonoBehaviour
         _StartButton.RegisterCallback<ClickEvent>(OnPlayGameClick);
         _CreditsButton.RegisterCallback<ClickEvent>(OnCreditsClick);
         QuitButton.RegisterCallback<ClickEvent>(OnQuitClick);
-        CreditsLabel = _document.rootVisualElement.Q<Label>("CreditsLabel");
+        //CreditsLabel = _document.rootVisualElement.Q<Label>("CreditsLabel");
 
         
-        CreditsLabel.style.display = DisplayStyle.None;
-        CreditsLabel.style.opacity = 0f;
+        // CreditsLabel.style.display = DisplayStyle.None;
+        // CreditsLabel.style.opacity = 0f;
 
     }
 
@@ -44,12 +44,12 @@ public class MainMenuEvents : MonoBehaviour
     private void OnCreditsClick(ClickEvent evt)
     {
         Debug.Log("Credits Button Pressed");
-        CreditsLabel.style.display = DisplayStyle.Flex;
+        //CreditsLabel.style.display = DisplayStyle.Flex;
         _StartButton.style.display = DisplayStyle.None;
         _CreditsButton.style.display = DisplayStyle.None;
         QuitButton.style.display = DisplayStyle.None;
 
-        CreditsLabel.style.opacity = 1f;
+        //CreditsLabel.style.opacity = 1f;
 
     }
 
@@ -93,7 +93,7 @@ public class MainMenuEvents : MonoBehaviour
     IEnumerator WaitThenLoadGame()
     {
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(3);
     }
 
 }
