@@ -39,6 +39,8 @@ public class PlayerHealth : MonoBehaviour
             hasDied = true;
             //Debug.Log("DeathStarted");
             DeathUIManager.SetActive(true);
+            rb.linearVelocityX = 0;
+            rb.linearVelocityY = 0;
         }
 
         if (hasDied)

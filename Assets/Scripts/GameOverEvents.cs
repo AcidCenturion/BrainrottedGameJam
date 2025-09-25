@@ -46,7 +46,7 @@ public class GameOverEvents : MonoBehaviour
     private void OnDisable()
     {
         _RespawnButton.UnregisterCallback<ClickEvent>(OnRespawnClick);
-        _RespawnButton.UnregisterCallback<ClickEvent>(OnMainMenuClick);
+        _MainMenuButton.UnregisterCallback<ClickEvent>(OnMainMenuClick);
     }
 
     public void FadeInFunction()

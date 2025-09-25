@@ -17,6 +17,7 @@ public class GameUIHandler : MonoBehaviour
     private Label Timer;
 
     public float StartTime = 500f;
+    public float playedTime = 0f;
 
     private void Start()
     {
@@ -72,6 +73,7 @@ public class GameUIHandler : MonoBehaviour
     void TimerCountdown()
     {
         float temp = StartTime -= Time.deltaTime;
+        playedTime = temp;
         Timer.text = ((int)temp).ToString();
     }
 }

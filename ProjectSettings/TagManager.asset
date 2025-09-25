@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SafeZone
   - Lightbulb
+  - WinCollider
   layers:
   - Default
   - TransparentFX
