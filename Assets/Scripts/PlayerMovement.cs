@@ -29,6 +29,8 @@ public class PlatformerPlayerMove : MonoBehaviour
 
     private bool isFalling = false;
 
+    [SerializeField] private AudioClip dashSoundClip;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -172,6 +174,10 @@ public class PlatformerPlayerMove : MonoBehaviour
     private void OnDash(InputValue input)
     {
         dashInput = input.isPressed;
+        if (dashCooldown <= 0)
+        {
+            SoundFXManager.instance.PlaySoundFXClip(dashSoundClip, transform, 0.33f);
+        }
     }
 
     /*
