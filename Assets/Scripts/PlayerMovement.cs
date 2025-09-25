@@ -174,6 +174,7 @@ public class PlatformerPlayerMove : MonoBehaviour
     private void OnDash(InputValue input)
     {
         dashInput = input.isPressed;
+        animator.SetBool("isDashing", true);
         if (dashCooldown <= 0)
         {
             SoundFXManager.instance.PlaySoundFXClip(dashSoundClip, transform, 0.33f);
