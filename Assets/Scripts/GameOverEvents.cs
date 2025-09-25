@@ -40,7 +40,7 @@ public class GameOverEvents : MonoBehaviour
     private void OnMainMenuClick(ClickEvent evt)
     {
         Debug.Log("MainMenu Button Pressed");
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(0);
     }
 
     private void OnDisable()

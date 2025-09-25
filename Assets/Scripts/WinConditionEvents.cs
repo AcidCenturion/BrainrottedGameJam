@@ -39,7 +39,7 @@ public class WinConditionEvents : MonoBehaviour
     private void OnMainMenuButtonClick(ClickEvent evt)
     {
         Debug.Log("MainMenu Button Pressed");
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(0);
     }
 
     private void OnDisables()

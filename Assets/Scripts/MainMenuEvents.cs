@@ -45,9 +45,9 @@ public class MainMenuEvents : MonoBehaviour
     {
         Debug.Log("Credits Button Pressed");
         //CreditsLabel.style.display = DisplayStyle.Flex;
-        _StartButton.style.display = DisplayStyle.None;
-        _CreditsButton.style.display = DisplayStyle.None;
-        QuitButton.style.display = DisplayStyle.None;
+        // _StartButton.style.display = DisplayStyle.None;
+        // _CreditsButton.style.display = DisplayStyle.None;
+        // QuitButton.style.display = DisplayStyle.None;
 
         //CreditsLabel.style.opacity = 1f;
 
@@ -93,7 +93,7 @@ public class MainMenuEvents : MonoBehaviour
     IEnumerator WaitThenLoadGame()
     {
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(2);
     }
 
 }

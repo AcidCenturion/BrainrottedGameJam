@@ -6193,7 +6193,7 @@ MonoBehaviour:
   GameOverEvents: {fileID: 910692494}
   maxHealth: 100
   currentHealth: 100
-  damageScaler: 6.5
+  damageScaler: 4.5
   CollectedLightbulbsNumber: 0
   hasDied: 0
 --- !u!95 &394007368
