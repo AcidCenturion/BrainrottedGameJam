@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class PlayerCollect : MonoBehaviour
 {
-    public int PlayerCollectNumber = 0;
+    [SerializeField] private AudioClip lightbulbSoundClip;
 
-    public GameObject WinUIManager;
+    public int PlayerCollectNumber = 0;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -12,14 +12,7 @@ public class PlayerCollect : MonoBehaviour
         {
             PlayerCollectNumber += 1;
             Debug.Log("collect #" + PlayerCollectNumber);
-        }
-
-        if (PlayerCollectNumber == 5)
-        {
-            if (other.CompareTag("WinCollider"))
-            {
-                WinUIManager.SetActive(true);
-            }
+            SoundFXManager.instance.PlaySoundFXClip(lightbulbSoundClip, transform, 2f);
         }
     }
 }
