@@ -178,6 +178,7 @@ public class PlatformerPlayerMove : MonoBehaviour
         {
             SoundFXManager.instance.PlaySoundFXClip(dashSoundClip, transform, 0.33f);
         }
+       
     }
 
     /*
