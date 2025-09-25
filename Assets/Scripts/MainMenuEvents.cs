@@ -8,8 +8,9 @@ public class MainMenuEvents : MonoBehaviour
     private UIDocument _document;
     private Button _StartButton;
     private Button _CreditsButton;
-    private Button _QuitButton;
+    private Button QuitButton;
     private VisualElement Container;
+    private Label CreditsLabel;
 
     public float fadeDuration = 2f;
 
@@ -20,11 +21,17 @@ public class MainMenuEvents : MonoBehaviour
 
         _StartButton = _document.rootVisualElement.Q("StartGameButton") as Button;
         _CreditsButton = _document.rootVisualElement.Q("CreditsButton") as Button;
-        _QuitButton = _document.rootVisualElement.Q("QuitButton") as Button;
+        QuitButton = _document.rootVisualElement.Q("QuitGameButton") as Button;
+        
 
         _StartButton.RegisterCallback<ClickEvent>(OnPlayGameClick);
         _CreditsButton.RegisterCallback<ClickEvent>(OnCreditsClick);
-        _QuitButton.RegisterCallback<ClickEvent>(OnQuitClick);
+        QuitButton.RegisterCallback<ClickEvent>(OnQuitClick);
+        CreditsLabel = _document.rootVisualElement.Q<Label>("CreditsLabel");
+
+        
+        CreditsLabel.style.display = DisplayStyle.None;
+        CreditsLabel.style.opacity = 0f;
 
     }
 
@@ -37,7 +44,13 @@ public class MainMenuEvents : MonoBehaviour
     private void OnCreditsClick(ClickEvent evt)
     {
         Debug.Log("Credits Button Pressed");
-        
+        CreditsLabel.style.display = DisplayStyle.Flex;
+        _StartButton.style.display = DisplayStyle.None;
+        _CreditsButton.style.display = DisplayStyle.None;
+        QuitButton.style.display = DisplayStyle.None;
+
+        CreditsLabel.style.opacity = 1f;
+
     }
 
     private void OnQuitClick(ClickEvent evt)
@@ -49,8 +62,9 @@ public class MainMenuEvents : MonoBehaviour
     private void OnDisable()
     {
         _StartButton.UnregisterCallback<ClickEvent>(OnPlayGameClick);
-        _CreditsButton.UnregisterCallback<ClickEvent>(OnPlayGameClick);
-        _QuitButton.UnregisterCallback<ClickEvent>(OnPlayGameClick);
+        _CreditsButton.UnregisterCallback<ClickEvent>(OnCreditsClick);
+        QuitButton.UnregisterCallback<ClickEvent>(OnQuitClick);
+        //BackButton.UnregisterCallback<ClickEvent>(OnBackClick);
     }
 
     public void FadeOutFunction()

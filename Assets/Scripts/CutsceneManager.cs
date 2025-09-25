@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class CutsceneManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class CutsceneManager : MonoBehaviour
     private VisualElement Blackout1;
     private VisualElement Blackout2;
     private VisualElement Blackout3;
+    private VisualElement Blackout4;
+    private VisualElement Blackout5;
 
     private float fadeDuration = 1f;
 
@@ -20,13 +23,19 @@ public class CutsceneManager : MonoBehaviour
         Blackout1 = _document.rootVisualElement.Q<VisualElement>("Blackout1");
         Blackout2 = _document.rootVisualElement.Q<VisualElement>("Blackout2");
         Blackout3 = _document.rootVisualElement.Q<VisualElement>("Blackout3");
+        Blackout4 = _document.rootVisualElement.Q<VisualElement>("Blackout4");
+        Blackout5 = _document.rootVisualElement.Q<VisualElement>("Blackout5");
 
         Blackout1.style.opacity = 1f;
         Blackout2.style.opacity = 1f;
-        Blackout3.style.opacity = 1f;
+        Blackout3.style.opacity = 0f;
+        Blackout4.style.opacity = 0f;
+        Blackout5.style.opacity = 0f;
         Blackout1.style.display = DisplayStyle.Flex;
         Blackout2.style.display = DisplayStyle.Flex;
-        Blackout3.style.display = DisplayStyle.Flex;
+        Blackout3.style.display = DisplayStyle.None;
+        Blackout4.style.display = DisplayStyle.None;
+        Blackout5.style.display = DisplayStyle.None;
     }
 
     private void Update()
@@ -47,8 +56,25 @@ public class CutsceneManager : MonoBehaviour
 
             else if (comicPanelNumber == 2)
             {
-                FadeOutB3Function();
+                FadeInB3Function();
                 Debug.Log(comicPanelNumber);
+            }
+
+            else if (comicPanelNumber == 3)
+            {
+                FadeInB4Function();
+                Debug.Log(comicPanelNumber);
+            }
+
+            else if (comicPanelNumber == 4)
+            {
+                FadeInB5Function();
+                Debug.Log(comicPanelNumber);
+            }
+
+            else if (comicPanelNumber == 5)
+            {
+                SceneManager.LoadScene(1);
             }
 
             comicPanelNumber += 1;
@@ -66,9 +92,19 @@ public class CutsceneManager : MonoBehaviour
         StartCoroutine(FadeOutB2());
     }
 
-    private void FadeOutB3Function()
+    private void FadeInB3Function()
     {
-        StartCoroutine(FadeOutB3());
+        StartCoroutine(FadeInB3());
+    }
+
+    private void FadeInB4Function()
+    {
+        StartCoroutine(FadeInB4());
+    }
+
+    private void FadeInB5Function()
+    {
+        StartCoroutine(FadeInB5());
     }
 
     IEnumerator FadeOutB1()
@@ -101,19 +137,46 @@ public class CutsceneManager : MonoBehaviour
         Blackout2.style.display = DisplayStyle.None;
     }
 
-    IEnumerator FadeOutB3()
+    IEnumerator FadeInB3()
     {
         Blackout3.style.display = DisplayStyle.Flex;
         float elapsed = 0f;
         while (elapsed < fadeDuration)
         {
-            float alpha = 1 - (elapsed / fadeDuration);
+            float alpha = elapsed / fadeDuration;
             Blackout3.style.opacity = alpha;
             elapsed += Time.deltaTime;
             yield return null;
         }
-        Blackout3.style.opacity = 0f;
-        Blackout3.style.display = DisplayStyle.None;
+        Blackout3.style.opacity = 1f;
+    }
+
+    IEnumerator FadeInB4()
+    {
+        Blackout4.style.display = DisplayStyle.Flex;
+        float elapsed = 0f;
+        while (elapsed < fadeDuration)
+        {
+            float alpha = elapsed / fadeDuration;
+            Blackout4.style.opacity = alpha;
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        Blackout4.style.opacity = 1f;
+    }
+
+    IEnumerator FadeInB5()
+    {
+        Blackout5.style.display = DisplayStyle.Flex;
+        float elapsed = 0f;
+        while (elapsed < fadeDuration)
+        {
+            float alpha = elapsed / fadeDuration;
+            Blackout5.style.opacity = alpha;
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        Blackout5.style.opacity = 1f;
     }
 
 }

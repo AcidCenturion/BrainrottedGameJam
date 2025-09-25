@@ -6419,6 +6419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightbulbSoundClip: {fileID: 8300000, guid: 2777e87de9a1f3541bca6ee90cc47829, type: 3}
   PlayerCollectNumber: 0
+  WinUIManager: {fileID: 1246503847}
 --- !u!61 &394007376
 BoxCollider2D:
   m_ObjectHideFlags: 0
